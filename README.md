@@ -28,14 +28,10 @@ set GDAX_SECRET=abcdefghijklmnopqrstuvwxyz1234567890abcdefghijklmnopqrstuvwxyz12
 ```
 
 Note that GDAX has both its production/live API and a Sandbox API. This script is currently setup to point to the
-Sandbox API for testing. When you have tested with the Sandbox API and feel ready to use the production/live API,
-we will need to change the `get_auth_client()` method in execution.py to point to the public API. To do so, comment
-out the `api-public.sandbox.gdax.com` line and uncomment the `api.gdax.com line`.
-
-```python
-    # api_url = "https://api.gdax.com"
-    api_url = "https://api-public.sandbox.gdax.com"
-```
+Sandbox API for testing by default. When you have tested with the Sandbox API and feel ready to use the production/live
+API, we will need to tell the script to point to the live exchange, which is done by using the `--production="True"`
+flag. That flag should be added to the usage commands in the next section for performing commands against the live
+exchanges.
 
 Caution! Be very careful when moving over to the production/live API. The script is very basic and does not do
 any validation against your trades. Erroneous script execution could lead to serious financial loss. Proceed with use
@@ -60,6 +56,11 @@ buy/sell order.
 python execution.py --cancel="655fafe4-26fc-4e70-ab2a-b038e7fe6683"
 python execution.py --cancel="2c4bd190-2026-45b5-9c57-c949f62a1ca2"
 python execution.py --cancel_all="BTC-USD"
+```
+
+To get live prices for all trading pairs, execute the following.
+```commandline
+python execution.py --tickers="True" --production="True"
 ```
 
 ## Credit
